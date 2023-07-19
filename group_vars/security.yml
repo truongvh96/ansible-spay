@@ -1,5 +1,5 @@
-proxyuser: "ngslabproxy"
-proxypass: "Ngs%402022py"
+proxyuser: "xxxx"
+proxypass: "xxxxxxxx"
 
-nexus3_user: "admin"
-nexus3_password: "Secu@9DS"
+nexus3_user: "xxx"
+nexus3_password: "xxxxxxx"
