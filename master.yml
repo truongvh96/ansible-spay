@@ -1,0 +1,4 @@
+---
+- import_playbook: install-docker.yml
+  when: task_name == "docker"
+  ignore_errors: true
