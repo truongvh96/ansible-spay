@@ -1,0 +1,5 @@
+proxy_ip: 172.24.101.194
+proxy_port: 3128
+docker_registry: 172.24.101.194
+url_docker_proxy: 172.24.101.194:8082
+url_docker_private: 172.24.101.194:8083

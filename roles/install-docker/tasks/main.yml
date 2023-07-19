@@ -1,0 +1,27 @@
+---
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /root/repo/
+    state: directory
+    mode: '0755'
+  
+
+- name: download all package .deb requirement
+  ansible.builtin.shell: apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances {{ item }} | grep "^\w" | sort -u)
+  args:
+    chdir: /root/repo/
+  loop: "{{ lookup('file', 'packages_required').split('\n') }}"
+
+
+- name: get list copy
+  shell: (cd /root/repo/; find . -maxdepth 1 -type 'f') | cut -d'/' -f2
+  register: files_to_copy
+
+
+- name: copy remote to local
+  fetch:
+    src: /root/repo/{{ item }}
+    dest: roles/install_repo/files/packages/
+    flat: yes
+  loop: "{{ files_to_copy['stdout_lines'] }}"

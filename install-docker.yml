@@ -1,0 +1,14 @@
+---
+- name: Checking
+  hosts: 
+  - all
+  gather_facts: True
+  connection: local
+  vars_files:
+    - group_vars/security.yml
+    - group_vars/common.yml
+  roles:
+    - get_packages
+  environment:
+    http_proxy: "{% if enable_proxy == 'yes' and group_names[0] != 'proxy' %}http://{{ proxyuser }}:{{ proxypass }}@{{ groups['proxy'][0] }}:{{ proxy_port }}{% endif %}"
+    https_proxy: "{% if enable_proxy == 'yes' and group_names[0] != 'proxy' %}http://{{ proxyuser }}:{{ proxypass }}@{{ groups['proxy'][0] }}:{{ proxy_port }}{% endif %}"
